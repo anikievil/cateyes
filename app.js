@@ -1,4 +1,4 @@
-/* ============ 代購貓 🐾 — 代購清單小幫手 ============ */
+/* ============ 代購貓 🐈‍⬛🐈 — 黑白雙貓・陰陽互補 ============ */
 /* 資料層獨立封裝（Storage），之後要換成雲端同步只需改這一層 */
 
 "use strict";
@@ -49,6 +49,27 @@ function statusLabel(trip, st) {
   if (st === "paid" && trip.role === "client") return "已付款";
   return STATUS[st].label;
 }
+
+/* 角色徽章：黑貓＝代購（陰）、白貓＝委託人（陽） */
+function roleBadge(trip) {
+  return trip.role === "client"
+    ? `<span class="badge badge-client">🐈 我是委託人</span>`
+    : `<span class="badge badge-agent">🐈‍⬛ 我是代購</span>`;
+}
+const roleCat = (trip) => (trip.role === "client" ? "🐈" : "🐈‍⬛");
+/* 對方是互補的那隻貓：我是黑貓（代購）→ 委託人是白貓，反之亦然 */
+const otherCat = (trip) => (trip.role === "client" ? "🐈‍⬛" : "🐈");
+
+/* 太極貓 logo（黑白陰陽 + 貓耳） */
+const LOGO_SVG = `
+<svg class="logo" viewBox="0 -8 100 108" aria-hidden="true">
+  <path d="M20 16 L8 -6 L38 5 Z" fill="#161616"/>
+  <path d="M80 16 L92 -6 L62 5 Z" fill="#fff" stroke="#161616" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="50" cy="50" r="46" fill="#fff" stroke="#161616" stroke-width="4"/>
+  <path fill="#161616" d="M50 4 a23 23 0 0 1 0 46 a23 23 0 0 0 0 46 a46 46 0 0 1 0 -92 z"/>
+  <circle cx="50" cy="27" r="6.5" fill="#161616"/>
+  <circle cx="50" cy="73" r="6.5" fill="#fff"/>
+</svg>`;
 
 const money = (n) => "NT$" + Math.round(n).toLocaleString("zh-TW");
 const esc = (s) =>
@@ -138,10 +159,10 @@ function renderHome() {
       const closed = isClosed(trip);
       const pct = st.buyableCount ? Math.round((st.boughtCount / st.buyableCount) * 100) : 0;
       return `
-      <div class="card trip-card clickable" data-open-trip="${trip.id}">
+      <div class="card trip-card clickable role-${trip.role === "client" ? "client" : "agent"}" data-open-trip="${trip.id}">
         <div class="trip-top">
           <h3>${esc(trip.name)}</h3>
-          <span class="badge ${trip.role === "client" ? "badge-client" : "badge-agent"}">${trip.role === "client" ? "我是委託人" : "我是代購"}</span>
+          ${roleBadge(trip)}
           ${closed ? `<span class="badge badge-closed">已截止</span>` : ""}
         </div>
         <div class="trip-meta">
@@ -161,10 +182,10 @@ function renderHome() {
 
   $app.innerHTML = `
     <header class="app-header">
-      <span class="logo">🐾</span>
+      ${LOGO_SVG}
       <div>
         <h1>代購貓</h1>
-        <div class="sub">代購清單小幫手</div>
+        <div class="sub">黑白雙貓・代購清單小幫手</div>
       </div>
       <div class="spacer"></div>
       <button class="btn btn-sm" data-action="backup">備份</button>
@@ -173,7 +194,7 @@ function renderHome() {
       db.trips.length
         ? cards
         : `<div class="empty">
-             <div class="empty-icon">🛍️</div>
+             <div class="empty-icon">🐈‍⬛🐈</div>
              <h3>還沒有任何檔期</h3>
              <p>建立第一個代購檔期，開始記錄大家的委託吧！</p>
            </div>`
@@ -203,7 +224,7 @@ function renderTrip() {
       <div style="min-width:0">
         <h1 style="font-size:1.15rem">${esc(trip.name)}</h1>
         <div class="sub">
-          ${trip.role === "client" ? "我是委託人" : "我是代購"}
+          ${roleCat(trip)} ${trip.role === "client" ? "我是委託人" : "我是代購"}
           ${trip.deadline ? ` · ${fmtDeadline(trip)}${closed ? "（已截止）" : ""}` : ""}
         </div>
       </div>
@@ -249,7 +270,7 @@ function renderShopping(trip, L) {
           const fee = itemFee(trip, item);
           const sub = [];
           if (item.spec) sub.push(esc(item.spec));
-          if (ui.groupBy === "category") sub.push("👤 " + esc(personName(item.personId)));
+          if (ui.groupBy === "category") sub.push(otherCat(trip) + " " + esc(personName(item.personId)));
           else if (item.category) sub.push("🏷️ " + esc(item.category));
           if (item.link) sub.push(`<a href="${esc(item.link)}" target="_blank" rel="noopener" data-stop>🔗 連結</a>`);
           if (item.note) sub.push(esc(item.note));
@@ -274,7 +295,7 @@ function renderShopping(trip, L) {
       return `
       <div class="group-block">
         <div class="group-head">
-          <h3>${ui.groupBy === "person" ? "👤 " : "🏷️ "}${esc(name)}</h3>
+          <h3>${ui.groupBy === "person" ? otherCat(trip) + " " : "🏷️ "}${esc(name)}</h3>
           <span class="group-sum">${items.length} 項 · ${money(sum)}</span>
         </div>
         ${rows}
@@ -334,7 +355,7 @@ function renderBill(trip, L) {
       return `
       <div class="card bill-card">
         <div class="bill-head">
-          <h3>👤 ${esc(p.name)}</h3>
+          <h3>${otherCat(trip)} ${esc(p.name)}</h3>
           <span class="bill-total">${money(total)}</span>
         </div>
         <div class="bill-summary">${L.got} ${money(paidSum)} / 未${trip.role === "client" ? "付" : "收"} ${money(total - paidSum)}</div>
@@ -425,8 +446,8 @@ function tripFormModal(trip) {
       <div class="field">
         <label>我的角色</label>
         <div class="radio-cards">
-          <label><input type="radio" name="role" value="agent" ${t.role !== "client" ? "checked" : ""} />我是代購<br><small>幫別人買</small></label>
-          <label><input type="radio" name="role" value="client" ${t.role === "client" ? "checked" : ""} />我是委託人<br><small>請別人買</small></label>
+          <label><input type="radio" name="role" value="agent" ${t.role !== "client" ? "checked" : ""} />🐈‍⬛ 我是代購<br><small>幫別人買</small></label>
+          <label><input type="radio" name="role" value="client" ${t.role === "client" ? "checked" : ""} />🐈 我是委託人<br><small>請別人買</small></label>
         </div>
       </div>
       <div class="field">
@@ -695,7 +716,7 @@ function billText(trip, person) {
   const L = labels(trip);
   const items = trip.items.filter((i) => i.personId === person.id && i.status !== "oos");
   const oos = trip.items.filter((i) => i.personId === person.id && i.status === "oos");
-  let lines = [`🐾 ${trip.name} — ${person.name} 的${trip.role === "client" ? "代購" : "委託"}明細`];
+  let lines = [`${roleCat(trip)} ${trip.name} — ${person.name} 的${trip.role === "client" ? "代購" : "委託"}明細`];
   items.forEach((item, idx) => {
     const spec = item.spec ? `（${item.spec}）` : "";
     lines.push(`${idx + 1}. ${item.name}${spec} ×${item.qty || 1} — ${money(itemAmount(trip, item))}`);

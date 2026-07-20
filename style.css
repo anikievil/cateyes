@@ -1,24 +1,17 @@
-/* ============ 代購貓 🐾 ============ */
+/* ============ 代購貓 🐈‍⬛🐈 — 黑白雙貓・陰陽互補 ============ */
 :root {
-  --bg: #f7f3ec;
+  --bg: #f2f1ec;          /* 宣紙白 */
   --card: #ffffff;
-  --ink: #3b3128;
-  --ink-soft: #8a7d6e;
-  --line: #ece5da;
-  --brand: #e8853b;
-  --brand-deep: #c96a24;
-  --brand-soft: #fdeedd;
-  --green: #3d9a63;
-  --green-soft: #e2f3e9;
-  --red: #d05555;
-  --red-soft: #fbe7e7;
-  --blue: #4a7fb5;
-  --blue-soft: #e5eef7;
-  --gold: #b58a2f;
-  --gold-soft: #f7efdb;
-  --gray-soft: #f0ece5;
+  --ink: #161616;         /* 墨黑 */
+  --ink-soft: #83817b;
+  --line: #e7e5df;
+  --paper-soft: #efeee9;
+  --gray-soft: #ecebe6;
+  --gray-mid: #d9d7d1;
+  --seal: #bf4136;        /* 朱印紅：收款蓋章、重點點綴 */
+  --seal-soft: #f8e9e6;
   --radius: 14px;
-  --shadow: 0 1px 3px rgba(59, 49, 40, .07), 0 4px 14px rgba(59, 49, 40, .05);
+  --shadow: 0 1px 3px rgba(22, 22, 22, .07), 0 4px 14px rgba(22, 22, 22, .05);
 }
 
 * { box-sizing: border-box; }
@@ -42,7 +35,7 @@ html, body {
 
 h1, h2, h3 { margin: 0; font-weight: 700; }
 button { font-family: inherit; }
-a { color: var(--brand-deep); }
+a { color: var(--seal); }
 
 /* ---------- header ---------- */
 .app-header {
@@ -51,7 +44,7 @@ a { color: var(--brand-deep); }
   gap: 10px;
   padding: 8px 0 18px;
 }
-.app-header .logo { font-size: 1.7rem; }
+.app-header .logo { width: 42px; height: 42px; flex-shrink: 0; }
 .app-header h1 { font-size: 1.35rem; letter-spacing: .02em; }
 .app-header .sub { font-size: .8rem; color: var(--ink-soft); margin-top: 1px; }
 .app-header .spacer { flex: 1; }
@@ -80,8 +73,8 @@ a { color: var(--brand-deep); }
   transition: filter .12s;
 }
 .btn:active { filter: brightness(.93); }
-.btn-primary { background: var(--brand); color: #fff; }
-.btn-danger { background: var(--red-soft); color: var(--red); }
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-danger { background: var(--seal-soft); color: var(--seal); }
 .btn-ghost { background: transparent; color: var(--ink-soft); }
 .btn-sm { padding: 6px 13px; font-size: .85rem; }
 .btn-block { width: 100%; }
@@ -92,12 +85,12 @@ a { color: var(--brand-deep); }
   bottom: 24px;
   border: none;
   border-radius: 999px;
-  background: var(--brand);
+  background: var(--ink);
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
   padding: 15px 22px;
-  box-shadow: 0 6px 18px rgba(201, 106, 36, .4);
+  box-shadow: 0 6px 18px rgba(22, 22, 22, .35);
   cursor: pointer;
   z-index: 20;
 }
@@ -111,6 +104,13 @@ a { color: var(--brand-deep); }
   margin-bottom: 14px;
 }
 .card.clickable { cursor: pointer; }
+
+/* 陰陽角色邊條：黑貓（代購）實心墨條、白貓（委託人）勾邊白條 */
+.trip-card.role-agent { border-left: 6px solid var(--ink); }
+.trip-card.role-client {
+  border-left: 6px solid var(--card);
+  box-shadow: inset 0 0 0 1.5px var(--ink), var(--shadow);
+}
 
 .trip-card .trip-top {
   display: flex;
@@ -141,7 +141,7 @@ a { color: var(--brand-deep); }
   color: var(--ink-soft);
 }
 .stat b { color: var(--ink); font-size: .95rem; }
-.stat.stat-good b { color: var(--green); }
+.stat.stat-good b { color: var(--seal); }
 
 .progress {
   height: 6px;
@@ -153,7 +153,7 @@ a { color: var(--brand-deep); }
 .progress > i {
   display: block;
   height: 100%;
-  background: var(--brand);
+  background: var(--ink);
   border-radius: 999px;
 }
 
@@ -165,8 +165,8 @@ a { color: var(--brand-deep); }
   padding: 3px 9px;
   white-space: nowrap;
 }
-.badge-agent { background: var(--brand-soft); color: var(--brand-deep); }
-.badge-client { background: var(--blue-soft); color: var(--blue); }
+.badge-agent { background: var(--ink); color: #fff; }               /* 🐈‍⬛ 陰 */
+.badge-client { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); } /* 🐈 陽 */
 .badge-closed { background: var(--gray-soft); color: var(--ink-soft); }
 
 .status-pill {
@@ -182,11 +182,12 @@ a { color: var(--brand-deep); }
   -webkit-appearance: none;
   text-align: center;
 }
+/* 狀態＝墨色由淡到濃，收款蓋朱印 */
 .st-todo    { background: var(--gray-soft);  color: var(--ink-soft); }
-.st-bought  { background: var(--green-soft); color: var(--green); }
-.st-oos     { background: var(--red-soft);   color: var(--red); }
-.st-shipped { background: var(--blue-soft);  color: var(--blue); }
-.st-paid    { background: var(--gold-soft);  color: var(--gold); }
+.st-bought  { background: var(--ink);        color: #fff; }
+.st-oos     { background: var(--paper-soft); color: #a5a29b; text-decoration: line-through; }
+.st-shipped { background: var(--gray-mid);   color: #45443f; }
+.st-paid    { background: var(--seal);       color: #fff; }
 
 /* ---------- tabs ---------- */
 .tabs {
@@ -208,9 +209,8 @@ a { color: var(--brand-deep); }
   cursor: pointer;
 }
 .tabs button.active {
-  background: var(--card);
-  color: var(--ink);
-  box-shadow: var(--shadow);
+  background: var(--ink);
+  color: #fff;
 }
 
 /* ---------- group toggle ---------- */
@@ -238,7 +238,7 @@ a { color: var(--brand-deep); }
   color: var(--ink-soft);
   cursor: pointer;
 }
-.seg button.active { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+.seg button.active { background: var(--ink); color: #fff; }
 
 /* ---------- item list ---------- */
 .group-block { margin-bottom: 20px; }
@@ -264,7 +264,7 @@ a { color: var(--brand-deep); }
 .item-row.done-oos { opacity: .55; }
 .item-main { flex: 1; min-width: 0; cursor: pointer; }
 .item-name { font-weight: 600; font-size: .97rem; word-break: break-word; }
-.item-name .qty { color: var(--brand-deep); font-weight: 700; }
+.item-name .qty { color: var(--seal); font-weight: 700; }
 .item-sub {
   color: var(--ink-soft);
   font-size: .8rem;
@@ -290,7 +290,7 @@ a { color: var(--brand-deep); }
   gap: 10px;
 }
 .bill-card .bill-head h3 { font-size: 1.05rem; flex: 1; }
-.bill-total { font-size: 1.05rem; font-weight: 700; color: var(--brand-deep); }
+.bill-total { font-size: 1.05rem; font-weight: 700; color: var(--ink); }
 .bill-lines { margin: 10px 0; border-top: 1px dashed var(--line); }
 .bill-line {
   display: flex;
@@ -309,8 +309,10 @@ a { color: var(--brand-deep); }
 .bill-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
 .bill-summary { font-size: .82rem; color: var(--ink-soft); margin-top: 2px; }
 
+/* 陰陽總計：墨底白字 */
 .grand-total {
-  background: var(--brand-soft);
+  background: var(--ink);
+  color: #fff;
   border-radius: var(--radius);
   padding: 14px 16px;
   margin-bottom: 14px;
@@ -320,7 +322,7 @@ a { color: var(--brand-deep); }
   flex-wrap: wrap;
   gap: 8px;
 }
-.grand-total .gt-label { font-size: .85rem; color: var(--brand-deep); font-weight: 600; }
+.grand-total .gt-label { font-size: .85rem; color: rgba(255,255,255,.75); font-weight: 600; }
 .grand-total .gt-nums { font-size: .9rem; }
 .grand-total b { font-size: 1.1rem; }
 
@@ -328,7 +330,7 @@ a { color: var(--brand-deep); }
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(43, 35, 27, .45);
+  background: rgba(22, 22, 22, .5);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -378,7 +380,7 @@ a { color: var(--brand-deep); }
 }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
-  border-color: var(--brand);
+  border-color: var(--ink);
 }
 .field .hint { font-size: .74rem; color: var(--ink-soft); margin-top: 4px; }
 .field-row { display: flex; gap: 10px; }
@@ -398,9 +400,9 @@ a { color: var(--brand-deep); }
 }
 .radio-cards input { display: none; }
 .radio-cards label:has(input:checked) {
-  border-color: var(--brand);
-  background: var(--brand-soft);
-  color: var(--brand-deep);
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
 }
 
 .modal-actions {
