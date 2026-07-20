@@ -44,7 +44,22 @@ a { color: var(--seal); }
   gap: 10px;
   padding: 8px 0 18px;
 }
-.app-header .logo { width: 42px; height: 42px; flex-shrink: 0; }
+/* 兩位貓使者 */
+.cat-duo { display: flex; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+.cat-svg { width: 34px; height: auto; }
+.cat-svg-sm { width: 26px; height: auto; flex-shrink: 0; }
+.cat-svg-lg { width: 92px; height: auto; }
+.cat-duo-lg { justify-content: center; gap: 12px; margin-bottom: 12px; }
+.duty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .8rem;
+  color: var(--ink-soft);
+  padding: 0 4px;
+  margin-bottom: 10px;
+}
+.duty b { color: var(--ink); }
 .app-header h1 { font-size: 1.35rem; letter-spacing: .02em; }
 .app-header .sub { font-size: .8rem; color: var(--ink-soft); margin-top: 1px; }
 .app-header .spacer { flex: 1; }
