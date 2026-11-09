@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>測試頁面</title>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      max-width: 600px;
-      margin: 80px auto;
-      padding: 0 20px;
-      color: #333;
-      background: #fafafa;
-    }
-    h1 { color: #2c3e50; }
-    .date { color: #888; font-size: 0.9em; margin-top: 8px; }
-  </style>
+  <title>健康小教室</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>測試頁面</h1>
-  <p>這是我的第一個透過 Git + GitHub + Netlify 部署的網頁。🎉</p>
-  <p class="date">建立日期：2026-06-27</p>
+  <nav class="topbar"><div class="wrap">
+    <a href="index.html" aria-current="page">首頁</a>
+    <a href="shingles.html">皮蛇</a>
+    <a href="leftovers.html">剩菜</a>
+    <a href="soy-sauce.html">醬油</a>
+  </div></nav>
+  <main class="wrap">
+    <h1>爸媽的健康小教室</h1>
+    <p class="lead">三堂生活衛教課，內容整理自衛生福利部、疾病管制署、國民健康署、食品藥物管理署與公立醫院的公開衛教資料。</p>
+
+    <div class="cards">
+      <a class="card" href="shingles.html">
+        <div class="t">第一課　皮蛇（帶狀疱疹）</div>
+        <div class="d">為什麼會長？出現症狀要多快看醫生？「繞一圈會死」是真的嗎？疫苗怎麼打？</div>
+      </a>
+      <a class="card" href="leftovers.html">
+        <div class="t">第二課　剩菜怎麼存才安全</div>
+        <div class="d">記住「2 小時、7 度、70 度、只熱一次」，吃隔夜菜會致癌嗎？</div>
+      </a>
+      <a class="card" href="soy-sauce.html">
+        <div class="t">第三課　醬油：少鹽、挑選、保存</div>
+        <div class="d">一天的鹽只要 2 湯匙多醬油就吃滿？瓶子上的「釀造」怎麼看？開了要放冰箱嗎？</div>
+      </a>
+    </div>
+
+    <p class="note" style="margin-top:40px">本網站僅供衛教參考，不能取代醫師診斷。身體不舒服請就醫。</p>
+  </main>
 </body>
 </html>
