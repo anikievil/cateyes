@@ -135,3 +135,22 @@ th { color: var(--muted); font-weight: 700; }
   .topbar { display: none; }
   html { font-size: 16px; }
 }
+
+.share { margin: 40px 0 0; text-align: center; }
+.share button {
+  font: inherit; font-weight: 800; font-size: 1.1rem;
+  background: var(--accent); color: var(--surface);
+  border: 0; border-radius: 999px; padding: 12px 32px; cursor: pointer;
+}
+.share button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+.share p { min-height: 1.8em; margin: 8px 0 0; }
+
+.media { list-style: none; padding: 0; }
+.media li {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px 18px; margin: 12px 0;
+}
+.media .kind { font-size: 0.85rem; font-weight: 800; color: var(--muted); }
+.media a { color: var(--accent); font-weight: 700; }
+.media .meta { font-size: 0.9rem; color: var(--muted); }
+.media:has(li) + [data-empty] { display: none; }

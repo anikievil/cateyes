@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>剩菜保存安全</title>
+  <meta name="description" content="剩菜保存四口訣：2 小時、7°C、70°C、只熱一次。" />
+  <meta property="og:title" content="剩菜保存安全" />
+  <meta property="og:description" content="剩菜保存四口訣：2 小時、7°C、70°C、只熱一次。" />
+  <meta property="og:type" content="website" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -50,6 +54,17 @@
       <div>不一定。如果先前在室溫放太久，細菌的毒素可能已經產生，加熱不一定能消除。</div>
     </div>
 
+    <h2>延伸閱讀與影片</h2>
+    <!-- 新增的文章/影片放這裡，格式見 CLAUDE.md -->
+    <ul class="media">
+    </ul>
+    <p class="note" data-empty>目前還沒有延伸資料。</p>
+
+    <div class="share">
+      <button type="button" id="share-btn">分享這一頁給親友</button>
+      <p id="share-msg" class="note" aria-live="polite"></p>
+    </div>
+
     <div class="sources">
       <p><b>資料來源</b></p>
       <ul>
@@ -61,5 +76,6 @@
       </ul>
     </div>
   </main>
+  <script src="share.js"></script>
 </body>
 </html>

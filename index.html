@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>健康小教室</title>
+  <meta name="description" content="給爸媽的生活衛教課：皮蛇、肌少症、剩菜、醬油、電器火災，整理自政府與公立醫院資料。" />
+  <meta property="og:title" content="健康小教室" />
+  <meta property="og:description" content="給爸媽的生活衛教課：皮蛇、肌少症、剩菜、醬油、電器火災，整理自政府與公立醫院資料。" />
+  <meta property="og:type" content="website" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -52,6 +56,11 @@
     </div>
 
     <p class="note" style="margin-top:40px">本網站僅供衛教參考，不能取代醫師診斷。身體不舒服請就醫。</p>
+    <div class="share">
+      <button type="button" id="share-btn">分享這一頁給親友</button>
+      <p id="share-msg" class="note" aria-live="polite"></p>
+    </div>
   </main>
+  <script src="share.js"></script>
 </body>
 </html>
