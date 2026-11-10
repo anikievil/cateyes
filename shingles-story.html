@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>皮蛇小故事</title>
+  <meta name="description" content="咕嚕咕和下酒菜說故事：皮蛇（帶狀疱疹）要知道的事。" />
+  <meta property="og:title" content="皮蛇小故事" />
+  <meta property="og:description" content="咕嚕咕和下酒菜說故事：皮蛇（帶狀疱疹）要知道的事。" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="story.css" />
+</head>
+<body>
+  <nav class="topbar"><div class="wrap">
+    <a href="index.html">首頁</a>
+    <a href="shingles.html">回皮蛇文字版</a>
+  </div></nav>
+  <main class="wrap">
+    <h1 class="story-title">皮蛇小故事</h1>
+    <div id="stage" class="stage" aria-live="polite"></div>
+    <div class="controls">
+      <button type="button" id="prev" aria-label="上一格">◀</button>
+      <button type="button" id="play" class="play">▶ 播放</button>
+      <button type="button" id="next" aria-label="下一格">▶</button>
+    </div>
+    <p id="counter" class="counter"></p>
+
+    <div class="share">
+      <button type="button" id="share-btn">分享這個故事給親友</button>
+      <p id="share-msg" class="note" aria-live="polite"></p>
+    </div>
+    <p class="note">故事內容依據本站〈皮蛇（帶狀疱疹）〉頁的資料來源整理，僅供衛教參考，不能取代醫師診斷。</p>
+  </main>
+  <script>
+    // who：誰在說話；show：畫面上出現誰；audio：之後放聲音檔，例如 'audio/shingles-01.mp3'
+    window.STORY = [
+      { who: 'gulugu', show: ['gulugu'], secs: 6,
+        text: '哎喲！我腰這邊<strong>一邊</strong>好痛，還長了一排<strong>水泡</strong>！' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 7,
+        text: '這可能是<strong>皮蛇</strong>！小時候得過<strong>水痘</strong>，病毒會一直躲在神經裡。' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 6,
+        text: '年紀大了、抵抗力變差，病毒就跑出來了。' },
+      { who: 'gulugu', show: ['gulugu', 'xiajiucai'], secs: 5,
+        text: '聽說皮蛇<strong>繞身體一圈</strong>就會死？' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 7, big: '❌ 沒這回事',
+        text: '皮蛇通常只長在身體<strong>一邊</strong>，不會繞一圈。' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 7, big: '🏥 3 天內看醫生',
+        text: '要趕快去看醫生！最好在<strong>3 天（72 小時）內</strong>開始吃藥。' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 7, big: '🚫 不抓 🚫 不亂敷',
+        text: '水泡<strong>不要抓破</strong>，也<strong>不要亂敷草藥</strong>，會感染。' },
+      { who: 'gulugu', show: ['gulugu', 'xiajiucai'], secs: 5,
+        text: '那我可以抱小孫子嗎？' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 8,
+        text: '先不要！<strong>沒得過水痘</strong>的小孩，碰到水泡可能被傳染<strong>水痘</strong>。' },
+      { who: 'xiajiucai', show: ['gulugu', 'xiajiucai'], secs: 8, big: '💉 50 歲以上',
+        text: '50 歲以上，可以問醫生打<strong>皮蛇疫苗</strong>，要打<strong>兩劑</strong>。' },
+      { who: 'gulugu', show: ['gulugu', 'xiajiucai'], secs: 7, big: '一邊痛＋水泡 → 3 天內看醫生',
+        text: '我記住了！' }
+    ];
+  </script>
+  <script src="story.js"></script>
+  <script src="share.js"></script>
+</body>
+</html>
