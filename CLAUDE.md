@@ -3,7 +3,7 @@
 給長輩上課用的衛教網站，純 HTML/CSS，無建置步驟。
 
 部署：Netlify 網站 `parents-health-class`（https://parents-health-class.netlify.app）。
-注意：另一個 Netlify 網站 `cateyes-studio` 與本網站無關，不要動它。
+注意：使用者另有一個 Netlify 網站 `cateyes-studio`，衛教網站不發佈到那裡，不要動它。
 
 ## 檔案
 - `index.html`：首頁，依分類（疾病與保健／飲食安全／居家安全…）排列課程卡片。
